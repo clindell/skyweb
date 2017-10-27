@@ -19,6 +19,7 @@
     "src/status_service.ts",
     "src/contacts_service.ts",
     "src/request_service.ts",
+    "src/uriobject_service.ts",
     "src/polling/auth_request.ts",
     "src/polling/poll.ts",
     "src/demo/demo.ts",

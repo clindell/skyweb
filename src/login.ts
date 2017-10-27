@@ -30,7 +30,7 @@ export class Login {
             return this.promiseSkypeToken(skypeAccount, t);
         }), this.getRegistrationToken, this.subscribeToResources, this.createStatusEndpoint, this.getSelfDisplayName];
 
-        return <Promise<{}>>(functions.reduce((previousValue:Promise<{}>, currentValue: any)=> {
+        return <Promise<SkypeAccount>>(functions.reduce((previousValue:Promise<SkypeAccount>, currentValue: any)=> {
             return previousValue.then((skypeAccount:SkypeAccount) => {
                 return new Promise(currentValue.bind(this, skypeAccount));
             });

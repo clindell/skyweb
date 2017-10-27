@@ -4,6 +4,7 @@ import ThreadService from "./thread_service";
 import Status from "./status/status";
 import { Promise } from "es6-promise";
 import { Member } from "./thread_service";
+import URIObjectService from "./uriobject_service";
 declare class Skyweb {
     messagesCallback: (messages: Array<any>) => void;
     skypeAccount: SkypeAccount;
@@ -13,6 +14,7 @@ declare class Skyweb {
     private statusService;
     private eventEmitter;
     threadService: ThreadService;
+    uriObjectService: URIObjectService;
     private cookieJar;
     constructor();
     login(username: any, password: any): Promise<{}>;
@@ -21,6 +23,7 @@ declare class Skyweb {
     acceptAuthRequest(username: any): void;
     declineAuthRequest(username: any): void;
     createThread(members: Member[]): Promise<string>;
+    fetchURIObject(uri: string, referenceId: any, callback: (referenceId: any, success: any, data: {}) => {}): void;
     on(eventName: string, listener: (eventName: string, content: any) => void): void;
     un(eventName: string, listener: (eventName: string, content: any) => void): void;
 }

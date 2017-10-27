@@ -13,6 +13,7 @@ import Status from "./status/status";
 import { Promise } from "es6-promise";
 import { Member } from "./thread_service";
 import { EventEmitter } from "./utils";
+import URIObjectService from "./uriobject_service";
 
 class Skyweb {
     public messagesCallback: (messages: Array<any>) => void;
@@ -23,6 +24,8 @@ class Skyweb {
     private statusService: StatusService;
     private eventEmitter: EventEmitter;
     public threadService: ThreadService;
+    public uriObjectService: URIObjectService;
+
     /**
      * CookieJar that is used for this Skyweb instance
      */
@@ -37,6 +40,7 @@ class Skyweb {
         this.statusService = new StatusService(this.cookieJar, this.eventEmitter);
         this.requestService = new RequestService(this.cookieJar, this.eventEmitter);
         this.threadService = new ThreadService(this.cookieJar, this.eventEmitter);
+        this.uriObjectService = new URIObjectService(this.cookieJar, this.eventEmitter);
     }
 
     login(username: any, password: any): Promise<{}> {
@@ -71,6 +75,10 @@ class Skyweb {
 
     createThread(members: Member[]): Promise<string> {
         return this.threadService.create(this.skypeAccount, members);
+    }
+
+    fetchURIObject(uri: string, referenceId: any, callback:(referenceId: any, success: any, data: {})=>{}) {
+        this.uriObjectService.fetchURIObject(this.skypeAccount, uri, referenceId, callback);
     }
 
     on(eventName: string, listener: (eventName: string, content: any) => void) {

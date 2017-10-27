@@ -7,7 +7,7 @@ export declare class Login {
     private cookieJar;
     private eventEmitter;
     constructor(cookieJar: CookieJar, eventEmitter: EventEmitter);
-    doLogin(skypeAccount: SkypeAccount): Promise<{}>;
+    doLogin(skypeAccount: SkypeAccount): Promise<SkypeAccount>;
     private sendLoginRequestOauth(skypeAccount, resolve, reject);
     private promiseSkypeToken(skypeAccount, magicT);
     private getRegistrationToken(skypeAccount, resolve, reject);

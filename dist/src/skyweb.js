@@ -10,6 +10,7 @@ var request_service_1 = require("./request_service");
 var thread_service_1 = require("./thread_service");
 var es6_promise_1 = require("es6-promise");
 var utils_1 = require("./utils");
+var uriobject_service_1 = require("./uriobject_service");
 var Skyweb = (function () {
     function Skyweb() {
         this.cookieJar = request.jar();
@@ -20,6 +21,7 @@ var Skyweb = (function () {
         this.statusService = new status_service_1.default(this.cookieJar, this.eventEmitter);
         this.requestService = new request_service_1.default(this.cookieJar, this.eventEmitter);
         this.threadService = new thread_service_1.default(this.cookieJar, this.eventEmitter);
+        this.uriObjectService = new uriobject_service_1.default(this.cookieJar, this.eventEmitter);
     }
     Skyweb.prototype.login = function (username, password) {
         var _this = this;
@@ -49,6 +51,9 @@ var Skyweb = (function () {
     };
     Skyweb.prototype.createThread = function (members) {
         return this.threadService.create(this.skypeAccount, members);
+    };
+    Skyweb.prototype.fetchURIObject = function (uri, referenceId, callback) {
+        this.uriObjectService.fetchURIObject(this.skypeAccount, uri, referenceId, callback);
     };
     Skyweb.prototype.on = function (eventName, listener) {
         this.eventEmitter.on(eventName, listener);
